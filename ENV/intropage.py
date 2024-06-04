@@ -12,7 +12,8 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\leone\Desktop\GUI_RCV\ENV\assets\frame1")
+ASSETS_PATH = OUTPUT_PATH.joinpath(r"assets\frame1")
+
 
 
 def relative_to_assets(path: str) -> Path:
@@ -36,23 +37,38 @@ def make_fullscreen(window):
 # window.configure(bg = "#183274")
 
 
+# def button_1_click(event=None):
+#         print("button_1 clicked")
+#         new_resolution(window)
+#         gui.create_canvas(window)
+#         main.main_gui_test(window)
+
+# # Mantener una referencia a las imágenes
+#     canvas.image_image_1 = image_image_1
+#     canvas.button_image_1 = button_image_1
+#     canvas.button_image_2 = button_image_2
+#     canvas.button_image_3 = button_image_3
+#     return canvas
+
 
 def create_intropage(window):
-    
+
+    print(OUTPUT_PATH)
+    print(ASSETS_PATH)
     canvas = Canvas(
-        window,
-        bg = "#183274",
-        height = 480,
-        width = 640,
-        bd = 0,
-        highlightthickness = 0,
-        relief = "ridge"
+    window,
+    bg = "#183274",
+    height = 480,
+    width = 640,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
     )
 
     canvas.place(x = 0, y = 0)
     canvas.create_text(
         117.0,
-        33.0,
+        19.0,
         anchor="nw",
         text="Simulador de Resucitación Cardio-Vascular",
         fill="#FFFFFF",
@@ -61,9 +77,9 @@ def create_intropage(window):
 
     canvas.create_rectangle(
         0.0,
-        85.0,
+        53.0,
         640.0,
-        174.0,
+        142.0,
         fill="#D9D9D9",
         outline="")
 
@@ -71,24 +87,40 @@ def create_intropage(window):
         file=relative_to_assets("image_1.png"))
     image_1 = canvas.create_image(
         320.0,
-        129.0,
+        97.0,
         image=image_image_1
     )
 
     canvas.create_rectangle(
         42.0,
-        227.0,
+        169.0,
         599.0,
-        371.0,
+        323.0,
         fill="#D9D9D9",
         outline="")
-    
+
+    canvas.create_rectangle(
+        42.0,
+        357.0,
+        599.0,
+        432.0,
+        fill="#D9D9D9",
+        outline="")
+
+    canvas.create_text(
+        253.0,
+        362.0,
+        anchor="nw",
+        text="Tamño de pantalla:",
+        fill="#000000",
+        font=("Inter", 15 * -1)
+    )
+
     def button_1_click(event=None):
         print("button_1 clicked")
         new_resolution(window)
         gui.create_canvas(window)
         main.main_gui_test(window)
-
 
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
@@ -96,12 +128,12 @@ def create_intropage(window):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=button_1_click,
+        command=lambda: button_1_click(),
         relief="flat"
     )
     button_1.place(
-        x=255.0,
-        y=287.0,
+        x=52.0,
+        y=272.0,
         width=145.0,
         height=37.0
     )
@@ -116,43 +148,62 @@ def create_intropage(window):
         relief="flat"
     )
     button_2.place(
-        x=63.0,
-        y=287.0,
-        width=145.0,
-        height=37.0
-    )
-
-    button_image_3 = PhotoImage(
-        file=relative_to_assets("button_3.png"))
-    button_3 = Button(
-        image=button_image_3,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
-        relief="flat"
-    )
-    button_3.place(
-        x=438.0,
-        y=287.0,
+        x=52.0,
+        y=207.0,
         width=145.0,
         height=37.0
     )
 
     canvas.create_text(
-        53.0,
-        237.0,
+        270.0,
+        173.0,
         anchor="nw",
-        text="Resolución de Pantalla:",
+        text="Modo de Uso:",
         fill="#000000",
-        font=("Inter", 15 * -1)
+        font=("Inter ExtraBold", 15 * -1)
     )
 
-    # Mantener una referencia a las imágenes
+    image_image_2 = PhotoImage(
+        file=relative_to_assets("image_2.png"))
+    image_2 = canvas.create_image(
+        427.0,
+        225.0,
+        image=image_image_2
+    )
+
+    image_image_3 = PhotoImage(
+        file=relative_to_assets("image_3.png"))
+    image_3 = canvas.create_image(
+        427.0,
+        295.0,
+        image=image_image_3
+    )
+
+    image_image_4 = PhotoImage(
+        file=relative_to_assets("image_4.png"))
+    image_4 = canvas.create_image(
+        231.0,
+        225.0,
+        image=image_image_4
+    )
+
+    image_image_5 = PhotoImage(
+        file=relative_to_assets("image_5.png"))
+    image_5 = canvas.create_image(
+        231.0,
+        290.0,
+        image=image_image_5
+    )
+
+    #Mantener una referencia a las imágenes
     canvas.image_image_1 = image_image_1
+    canvas.image_image_2 = image_image_2
+    canvas.image_image_3 = image_image_3
+    canvas.image_image_4 = image_image_4
+    canvas.image_image_5 = image_image_5
     canvas.button_image_1 = button_image_1
     canvas.button_image_2 = button_image_2
-    canvas.button_image_3 = button_image_3
-
+    
 
     return canvas
 
