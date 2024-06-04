@@ -5,6 +5,7 @@
 
 from pathlib import Path
 import gui
+import basic_mode
 import main
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -138,13 +139,19 @@ def create_intropage(window):
         height=37.0
     )
 
+    def button_2_click(event=None):
+        print("button_2 clicked")
+        #window.geometry("1920x1080")
+        window.attributes("-fullscreen", True)
+        basic_mode.GUI_basic_mode(window)
+
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: button_2_click(),
         relief="flat"
     )
     button_2.place(
