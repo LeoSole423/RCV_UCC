@@ -28,7 +28,7 @@ def create_canvas(window):
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
-)
+    )
 
     canvas.place(x = 0, y = 0)
     canvas.create_rectangle(
