@@ -36,24 +36,34 @@ frec_index = count()
 def GUI_basic_mode(window):
     #Funciones
     def check_data():
+        if not running:
+            return
         data_sim.get_pressure(press_index,press_x,press_y)
         data_sim.get_frecuency(frec_index,frec_x,frec_y)
+        hand_pos = data_sim.get_handspos()
 
         #For pressure
         if(press_y[-1] > 5 and press_y[-1] < 6):
-            change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the second rectangle to green
+            change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the pressure rectangle to green
         elif(press_y[-1] < 5):
-            change_rectangle_color(pressure_rectangle, "#0000FF")  # Change the second rectangle to blue
+            change_rectangle_color(pressure_rectangle, "#0000FF")  # Change the pressure rectangle to blue
         elif(press_y[-1] > 6):
-            change_rectangle_color(pressure_rectangle, "#FF0000")   # Change the second rectangle to red
+            change_rectangle_color(pressure_rectangle, "#FF0000")   # Change the pressure rectangle to red
         
         #For frecuency
         if(frec_y[-1] > 100 and frec_y[-1] < 120):
-            change_rectangle_color(frecuency_rectangle, "#00FF00")  # Change the second rectangle to green
+            change_rectangle_color(frecuency_rectangle, "#00FF00")  # Change the frecuency rectangle to green
         elif(frec_y[-1] < 100):
-            change_rectangle_color(frecuency_rectangle, "#0000FF")  # Change the second rectangle to blue
+            change_rectangle_color(frecuency_rectangle, "#0000FF")  # Change the frecuency rectangle to blue
         elif(frec_y[-1] > 120):
-            change_rectangle_color(frecuency_rectangle, "#FF0000")   # Change the second rectangle to red
+            change_rectangle_color(frecuency_rectangle, "#FF0000")   # Change the frecuency rectangle to red
+
+        #For Hand Position
+        if (hand_pos == 1):
+            change_rectangle_color(hands_rectangle, "#00FF00")  # Change the hands rectangle to green
+        else:
+            change_rectangle_color(hands_rectangle, "#FF0000")  # Change the hands rectangle to red
+
 
         window.after(500,check_data)
     
@@ -77,6 +87,10 @@ def GUI_basic_mode(window):
             minutes = 0
             time_string = f"{minutes:02}:{seconds:02}:{milliseconds:02}"
             timer_label.config(text=time_string)
+            # Example usage of change_rectangle_color function
+            change_rectangle_color(frecuency_rectangle, "#C0C0C0")  # Change the first rectangle to gray
+            change_rectangle_color(pressure_rectangle, "#C0C0C0")  # Change the second rectangle to gray
+            change_rectangle_color(hands_rectangle, "#C0C0C0")  # Change the third rectangle to gray
 
     def update_timer():
         global milliseconds, seconds, minutes
@@ -234,13 +248,17 @@ def GUI_basic_mode(window):
         image=image_image_7
     )
 
+    def button_start():
+        start_timer()
+        check_data()
+    
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=start_timer,
+        command= button_start,
         relief="flat"
     )
     button_1.place(
@@ -291,11 +309,11 @@ def GUI_basic_mode(window):
     # update_colors()  # Initial call to start the cycle
 
     # Example usage of change_rectangle_color function
-    change_rectangle_color(frecuency_rectangle, "#FF0000")  # Change the first rectangle to red
-    #change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the second rectangle to green
-    change_rectangle_color(hands_rectangle, "#00FF00")  # Change the third rectangle to blue
+    change_rectangle_color(frecuency_rectangle, "#C0C0C0")  # Change the first rectangle to gray
+    change_rectangle_color(pressure_rectangle, "#C0C0C0")  # Change the second rectangle to gray
+    change_rectangle_color(hands_rectangle, "#C0C0C0")  # Change the third rectangle to gray
 
-    check_data()
+    
 
     # Mantener una referencia a las imágenes
     canvas.button_image_1 = button_image_1
