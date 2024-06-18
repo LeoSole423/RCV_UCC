@@ -1,6 +1,7 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
-import itertools
+from itertools import count
+import data_sim
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH.joinpath(r"assets\frame2")
@@ -20,9 +21,42 @@ minutes = 0
 # window.geometry("1920x1080")
 # window.configure(bg = "#9993BD")
 
+# Datos presion
+press_y = []
+press_x = []
+press_index = count()
+
+# Datos frecuecia
+frec_y = []
+frec_x = [] 
+frec_index = count()
+
+
+
 def GUI_basic_mode(window):
     #Funciones
+    def check_data():
+        data_sim.get_pressure(press_index,press_x,press_y)
+        data_sim.get_frecuency(frec_index,frec_x,frec_y)
 
+        #For pressure
+        if(press_y[-1] > 5 and press_y[-1] < 6):
+            change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the second rectangle to green
+        elif(press_y[-1] < 5):
+            change_rectangle_color(pressure_rectangle, "#0000FF")  # Change the second rectangle to blue
+        elif(press_y[-1] > 6):
+            change_rectangle_color(pressure_rectangle, "#FF0000")   # Change the second rectangle to red
+        
+        #For frecuency
+        if(frec_y[-1] > 100 and frec_y[-1] < 120):
+            change_rectangle_color(frecuency_rectangle, "#00FF00")  # Change the second rectangle to green
+        elif(frec_y[-1] < 100):
+            change_rectangle_color(frecuency_rectangle, "#0000FF")  # Change the second rectangle to blue
+        elif(frec_y[-1] > 120):
+            change_rectangle_color(frecuency_rectangle, "#FF0000")   # Change the second rectangle to red
+
+        window.after(500,check_data)
+    
     def change_rectangle_color(rectangle_id, color):
         canvas.itemconfig(rectangle_id, fill=color)
     
@@ -244,22 +278,24 @@ def GUI_basic_mode(window):
     timer_label = Label(window, text="00:00:00", font=("Inter Black", 42), bg="#B7AEAE", fg="#000000")
     timer_label.place(x=999, y=425)  # Ajusta la posición según tu diseño
 
-    colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"]
-    color_cycle = itertools.cycle(colors)
+    # colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"]
+    # color_cycle = itertools.cycle(colors)
 
-    def update_colors():
-        current_color = next(color_cycle)
-        canvas.itemconfig(frecuency_rectangle, fill=current_color)
-        canvas.itemconfig(pressure_rectangle, fill=current_color)
-        canvas.itemconfig(hands_rectangle, fill=current_color)
-        window.after(1000, update_colors)  # Schedule this function to run again after 1 second
+    # def update_colors():
+    #     current_color = next(color_cycle)
+    #     canvas.itemconfig(frecuency_rectangle, fill=current_color)
+    #     canvas.itemconfig(pressure_rectangle, fill=current_color)
+    #     canvas.itemconfig(hands_rectangle, fill=current_color)
+    #     window.after(1000, update_colors)  # Schedule this function to run again after 1 second
 
-    update_colors()  # Initial call to start the cycle
+    # update_colors()  # Initial call to start the cycle
 
     # Example usage of change_rectangle_color function
     change_rectangle_color(frecuency_rectangle, "#FF0000")  # Change the first rectangle to red
-    change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the second rectangle to green
-    change_rectangle_color(hands_rectangle, "#0000FF")  # Change the third rectangle to blue
+    #change_rectangle_color(pressure_rectangle, "#00FF00")  # Change the second rectangle to green
+    change_rectangle_color(hands_rectangle, "#00FF00")  # Change the third rectangle to blue
+
+    check_data()
 
     # Mantener una referencia a las imágenes
     canvas.button_image_1 = button_image_1
