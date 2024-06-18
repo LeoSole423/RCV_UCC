@@ -53,7 +53,8 @@ def create_canvas(window):
     image_1 = canvas.create_image(
         159.0,
         246.0,
-        image=image_image_1
+        image=image_image_1,
+        state = 'hidden'
     )
 
     image_image_2 = PhotoImage(
