@@ -2,16 +2,6 @@ import random
 from itertools import count
 from time import sleep
 
-# Datos presion
-press_y = []
-press_x = []
-press_index = count()
-
-# Datos frecuecia
-frec_y = []
-frec_x = [] 
-frec_index = count()
-
 def get_pressure(aux_count, x_axis, y_axis):
     y_axis.append(random.uniform(4.7,6.2))
     x_axis.append(next(aux_count))
