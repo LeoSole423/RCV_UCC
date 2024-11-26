@@ -5,18 +5,19 @@ import intropage
 from tkinter import Tk
 import random
 from itertools import count
+from data_sim import get_pressure, get_frecuency
 
 
 def on_closing(window):
     window.quit()
 
-def get_pressure(aux_count, x_axis, y_axis):
-    y_axis.append(random.uniform(4.7,6.2))
-    x_axis.append(next(aux_count))
+# def get_pressure(aux_count, x_axis, y_axis):
+#     y_axis.append(random.uniform(4.7,6.2))
+#     x_axis.append(next(aux_count))
 
-def get_frecuency(aux_count, x_axis, y_axis):
-    y_axis.append(random.uniform(98,125))
-    x_axis.append(next(aux_count))
+# def get_frecuency(aux_count, x_axis, y_axis):
+#     y_axis.append(random.uniform(98,125))
+#     x_axis.append(next(aux_count))
 
 def exit_fullscreen(window):
     window.attributes('-fullscreen', False)
@@ -46,7 +47,7 @@ def main_gui_test(window):
     def loop():
         get_pressure(press_index,press_x,press_y)
         get_frecuency(frec_index,frec_x,frec_y)
-        window.after(1000,loop)
+        window.after(500,loop)
 
     loop()
 
