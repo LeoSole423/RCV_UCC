@@ -11,7 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\leone\Desktop\GUI_RCV\ENV\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH.joinpath(r"assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -28,7 +28,7 @@ def create_canvas(window):
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
-)
+    )
 
     canvas.place(x = 0, y = 0)
     canvas.create_rectangle(
@@ -53,7 +53,8 @@ def create_canvas(window):
     image_1 = canvas.create_image(
         159.0,
         246.0,
-        image=image_image_1
+        image=image_image_1,
+        state = 'hidden'
     )
 
     image_image_2 = PhotoImage(

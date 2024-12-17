@@ -1,5 +1,6 @@
 import gui
 import plots
+import basic_mode
 import intropage
 from tkinter import Tk
 import random
@@ -59,6 +60,10 @@ def main_gui_test(window):
         window.after(1000, testing)
     
     #testing()
+
+def simple_GUI(window):
+    basic_mode.GUI_basic_mode(window)
+
 
 
 def main():
