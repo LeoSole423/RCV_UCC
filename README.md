@@ -86,5 +86,3 @@ Proyecto de investigación de Resucitación Cardio Vascular de la Universidad Ca
    ```bash
    python main.py
    ```
-
----
