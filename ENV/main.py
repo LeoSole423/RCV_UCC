@@ -5,6 +5,7 @@ import intropage
 from tkinter import Tk
 import random
 from itertools import count
+from constantes import REFRESH_RATE
 
 
 def on_closing(window):
@@ -46,7 +47,7 @@ def main_gui_test(window):
     def loop():
         get_pressure(press_index,press_x,press_y)
         get_frecuency(frec_index,frec_x,frec_y)
-        window.after(1000,loop)
+        window.after(REFRESH_RATE,loop)
 
     loop()
 

@@ -3,6 +3,7 @@ import random
 from itertools import count
 from matplotlib.animation import FuncAnimation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from constantes import REFRESH_RATE
 
 
 def pressure_plot(press_x, press_y, window):
@@ -39,7 +40,7 @@ def pressure_plot(press_x, press_y, window):
         # Dibujar una zona verde translúcida para indicar frecuencia correcta
         press_ax.axhspan(5, 6, color='green', alpha=0.3)
 
-    ani = FuncAnimation(pressure, animate, interval = 1000, cache_frame_data=False)
+    ani = FuncAnimation(pressure, animate, interval = REFRESH_RATE, cache_frame_data=False)
 
     canvas = FigureCanvasTkAgg(figure=pressure, master=window)
     canvas.draw()
@@ -90,7 +91,7 @@ def frecuency_plot(frec_x, frec_y, window):
 
 
 
-    frec_ani = FuncAnimation(frecuency, animate_frecuency, interval = 1000, cache_frame_data=False)
+    frec_ani = FuncAnimation(frecuency, animate_frecuency, interval = REFRESH_RATE, cache_frame_data=False)
 
     frecuency_canvas = FigureCanvasTkAgg(figure=frecuency, master=window)
     frecuency_canvas.draw()
@@ -135,7 +136,7 @@ def ef_frecuency_plot(press_y, frec_y, window):
         ef_frec_ax.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
         contador=0
 
-    ef_frec_ani = FuncAnimation(ef_frec, animate_ef_frecuency, interval = 1000, cache_frame_data=False)
+    ef_frec_ani = FuncAnimation(ef_frec, animate_ef_frecuency, interval = REFRESH_RATE, cache_frame_data=False)
 
     ef_frecuency_canvas = FigureCanvasTkAgg(figure=ef_frec, master=window)
     ef_frecuency_canvas.draw()
